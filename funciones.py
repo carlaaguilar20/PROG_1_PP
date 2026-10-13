@@ -7,14 +7,27 @@
 
 def ingresar_legajo():
     """Solicita un legajo y valida que sea un entero positivo."""
-    legajo = input("Ingrese el legajo: ")
 
-    while not legajo.isdigit() or int(legajo) == 0:
+    legajo = input("Ingrese el legajo: ")
+    valido = False
+
+    while not valido:
+        valido = True
+
+        if len(legajo) == 0:
+            valido = False
+        else:
+            for i in range(len(legajo)):
+                if ord(legajo[i]) < 48 or ord(legajo[i]) > 57:
+                    valido = False
+
+        if valido and int(legajo) > 0:
+            break
+
         print("Error. El legajo debe ser un entero positivo.")
         legajo = input("Ingrese el legajo: ")
 
     return int(legajo)
-
 
 def ingresar_nombre():
     """Solicita apellido y nombre y valida que sean alfabeticos."""
@@ -26,7 +39,7 @@ def ingresar_nombre():
 
     return nombre
 
-
+6
 def ingresar_genero():
     """Solicita el genero y valida que sea F, M o X."""
     genero = input("Ingrese genero (F/M/X): ").upper()
