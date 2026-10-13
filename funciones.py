@@ -42,6 +42,7 @@ def ingresar_nombre():
 6
 def ingresar_genero():
     """Solicita el genero y valida que sea F, M o X."""
+
     genero = input("Ingrese genero (F/M/X): ").upper()
 
     while genero != "F" and genero != "M" and genero != "X":
@@ -53,15 +54,27 @@ def ingresar_genero():
 
 def ingresar_nota():
     """Solicita una nota entera entre 1 y 10."""
-    nota = input("Ingrese la nota (1 a 10): ")
 
-    while not nota.isdigit() or int(nota) < 1 or int(nota) > 10:
+    nota = input("Ingrese la nota (1 a 10): ")
+    valido = False
+
+    while not valido:
+        valido = True
+
+        if len(nota) == 0:
+            valido = False
+        else:
+            for i in range(len(nota)):
+                if ord(nota[i]) < 48 or ord(nota[i]) > 57:
+                    valido = False
+
+        if valido and 1 <= int(nota) <= 10:
+            break
+
         print("Error. La nota debe ser un entero entre 1 y 10.")
         nota = input("Ingrese la nota (1 a 10): ")
 
     return int(nota)
-
-
 # -----------------------------------------
 # CARGA DE LAS LISTAS PARALELAS
 # -----------------------------------------
